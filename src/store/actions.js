@@ -7,10 +7,10 @@ const actions = {
             return;
         }
         if(state.quescount < state.questions.length){
-            commit('quescountDecrement')
+            commit('quescountDecrement');
         }else{
-            commit('quesCompleted')
-            router.push('/result')
+            commit('quesCompleted');
+            router.push('/result');
         }
     }
 }

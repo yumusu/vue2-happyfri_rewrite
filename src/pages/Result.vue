@@ -65,7 +65,7 @@ export default {
                 this.correctNums ++
             }
         })
-        console.log(this.score)
+        // console.log(this.score)
     }
 }
 </script>

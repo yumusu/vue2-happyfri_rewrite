@@ -4,7 +4,7 @@
         <span>题目{{ quescount }}</span>
     </header>
     <div class="question_container">
-        <header class="question_header">{{currentQues.quesTitle}}</header>
+        <header class="question_header">{{ currentQues.quesTitle }}</header>
         <ul class="answer_list">
             <li v-for="answer in currentQues.quesAns" :key="answer.ansCode" @click="liClick(answer.ansCode)">
                 <span class="answer_code" :class="{'answer_selected': selectedAns === answer.ansCode}">{{ answer.ansCode }}</span>
@@ -21,6 +21,7 @@
 import { mapState } from 'vuex'
 import { mapMutations } from 'vuex'
 import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'Resolve',
@@ -30,14 +31,13 @@ export default {
         }
     },
     computed: {
-        // 当前问题
-        currentQues(){
-            return this.$store.getters.currentQues
-        },
         ...mapState({
             quescount: 'quescount',
             selectedAns: 'selectedAns',
             questions: 'questions'
+        }),
+        ...mapGetters({
+            currentQues: 'currentQues'
         })
     },
     methods: {
