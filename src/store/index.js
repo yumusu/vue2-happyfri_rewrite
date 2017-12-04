@@ -126,7 +126,30 @@ const store = new Vuex.Store({
     getters: {
         // 根据quescount(当前问题)返回问题
         currentQues(state){
-            return state.questions.find((val) => val.quesId === state.quescount)
+            // 判断是不是箭头函数的问题，结果不是
+            // return state.questions.find((val) => val.quesId === state.quescount);
+            try{
+                // 这里会执行
+                // console.log("currentQues执行了");
+                if(state.questions.find){
+                    return state.questions.find(function(val){
+                        // 这里不会执行，判断是安卓UC不支持find
+                        // console.log("find执行了");
+                        return val.quesId === state.quescount;
+                    });
+                }else{
+                    // filter是一个数组，所以要取[0]
+                    return state.questions.filter(function(val){
+                        // console.log("filter执行了");
+                        // console.log(val.quesId, state.quescount);
+                        return val.quesId === state.quescount;
+                    })[0];
+                }
+                
+            }catch(e){
+                console.log(e.name + ":" + e.message);
+            }
+            
         }
     },
     mutations,
